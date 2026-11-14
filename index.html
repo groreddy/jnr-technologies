@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080808">
+  <meta name="description" content="JNR Technologies provides CCTV, electrical, networking, and repair services for homes and businesses in Hyderabad.">
+  <title>JNR Technologies | CCTV, Electrical & Networking</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #f5f8fc;
+      --muted: #a4b1c2;
+      --navy: #07111f;
+      --panel: #0e1b2b;
+      --line: rgba(207, 224, 242, .12);
+      --cyan: #45d6e8;
+      --blue: #4c8dff;
+      --green: #28c784;
+      --content: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 82px; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--navy);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    .wrap { width: min(var(--content), calc(100% - 40px)); margin-inline: auto; }
+    .eyebrow {
+      color: var(--cyan);
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .section { padding: 92px 0; }
+    .section-heading { max-width: 700px; margin: 0 auto 44px; text-align: center; }
+    .section-heading h2 { margin: 10px 0 12px; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.1; letter-spacing: -.04em; }
+    .section-heading p { margin: 0; color: var(--muted); }
+
+    .header {
+      position: sticky;
+      z-index: 10;
+      top: 0;
+      background: rgba(7, 17, 31, .9);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(16px);
+    }
+    .nav { min-height: 74px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 900; letter-spacing: .03em; }
+    .brand-mark {
+      display: grid;
+      width: 42px;
+      aspect-ratio: 1;
+      place-items: center;
+      color: var(--navy);
+      border-radius: 13px;
+      background: linear-gradient(140deg, var(--cyan), var(--blue));
+      font-size: 1.2rem;
+    }
+    .brand-name { display: block; font-size: 1.12rem; line-height: 1.1; }
+    .brand-sub { display: block; margin-top: 4px; color: var(--muted); font-size: .61rem; letter-spacing: .13em; }
+    .nav-links { display: flex; align-items: center; gap: 26px; color: #d6e0ec; font-size: .88rem; }
+    .nav-links a:hover, .footer a:hover { color: var(--cyan); }
+    .nav-cta, .button {
+      display: inline-flex;
+      min-height: 46px;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 19px;
+      border: 0;
+      border-radius: 12px;
+      color: #04111a;
+      background: linear-gradient(120deg, var(--cyan), #8ce9d7);
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .2s ease, filter .2s ease;
+    }
+    .nav-cta:hover, .button:hover { transform: translateY(-2px); filter: brightness(1.05); }
+    .menu-button { display: none; padding: 8px; border: 1px solid var(--line); border-radius: 9px; color: var(--ink); background: transparent; cursor: pointer; }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 96px 0 72px;
+      background:
+        linear-gradient(90deg, rgba(7,17,31,.98) 0%, rgba(7,17,31,.9) 50%, rgba(7,17,31,.55) 100%),
+        linear-gradient(0deg, var(--navy), transparent 55%),
+        url("https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=2000&q=85") center 42% / cover;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; align-items: center; gap: 56px; }
+    .badge { display: inline-flex; align-items: center; gap: 9px; padding: 8px 13px; border: 1px solid var(--line); border-radius: 99px; color: #d6e0ec; background: rgba(14,27,43,.75); font-size: .82rem; }
+    .badge::before { width: 8px; height: 8px; border-radius: 50%; background: var(--green); content: ""; }
+    .hero h1 { max-width: 720px; margin: 22px 0; font-size: clamp(2.9rem, 6vw, 5.1rem); line-height: 1.02; letter-spacing: -.055em; }
+    .gradient-text { color: var(--cyan); }
+    .hero-copy { max-width: 620px; color: #c1ccda; font-size: 1.08rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .button.secondary { color: var(--ink); border: 1px solid var(--line); background: rgba(14,27,43,.86); }
+    .hero-card { padding: 14px; border: 1px solid rgba(255,255,255,.16); border-radius: 22px; background: rgba(7,17,31,.76); box-shadow: 0 24px 80px rgba(0,0,0,.32); backdrop-filter: blur(14px); }
+    .hero-image { position: relative; overflow: hidden; aspect-ratio: 1.42; border-radius: 15px; }
+    .hero-image img { width: 100%; height: 100%; object-fit: cover; }
+    .live-label { position: absolute; top: 13px; left: 13px; padding: 6px 10px; border-radius: 8px; color: white; background: rgba(7,17,31,.78); font-size: .72rem; font-weight: 800; }
+    .hero-card-bottom { display: flex; justify-content: space-between; gap: 12px; padding: 17px 5px 3px; }
+    .hero-card-bottom strong { display: block; font-size: .93rem; }
+    .hero-card-bottom span { color: var(--muted); font-size: .77rem; }
+    .service-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 66px; }
+    .strip-item { padding: 17px; border: 1px solid var(--line); border-radius: 14px; background: rgba(14,27,43,.76); }
+    .strip-item strong { display: block; color: var(--cyan); font-size: 1rem; }
+    .strip-item span { color: var(--muted); font-size: .78rem; }
+
+    .services { background: #0a1625; }
+    .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .service-card, .package, .feature-panel, .faq-item, .contact-card { border: 1px solid var(--line); border-radius: 19px; background: var(--panel); }
+    .service-card { overflow: hidden; transition: transform .2s ease, border-color .2s ease; }
+    .service-card:hover { transform: translateY(-4px); border-color: rgba(69,214,232,.55); }
+    .service-card img { display: block; width: 100%; height: 185px; object-fit: cover; }
+    .service-content { padding: 23px; }
+    .service-icon { color: var(--cyan); font-size: 1.25rem; }
+    .service-content h3 { margin: 11px 0 8px; font-size: 1.22rem; }
+    .service-content p { margin: 0 0 16px; color: var(--muted); font-size: .91rem; }
+    .text-link { color: var(--cyan); font-size: .88rem; font-weight: 750; }
+
+    .packages { background: var(--navy); }
+    .package-grid { display: grid; grid-template-columns: repeat(3, 1fr); align-items: stretch; gap: 18px; }
+    .package { display: flex; flex-direction: column; padding: 25px; }
+    .package.featured { border-color: var(--cyan); background: linear-gradient(160deg, #10243a, var(--panel)); box-shadow: 0 16px 54px rgba(69,214,232,.08); }
+    .package-label { color: var(--muted); font-size: .74rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .package h3 { margin: 9px 0 7px; font-size: 1.35rem; }
+    .price { margin: 7px 0 19px; color: var(--cyan); font-size: 1.85rem; font-weight: 900; letter-spacing: -.04em; }
+    .price small { color: var(--muted); font-size: .72rem; font-weight: 500; letter-spacing: 0; }
+    .package ul { flex: 1; margin: 0 0 22px; padding: 0; list-style: none; }
+    .package li { display: flex; gap: 10px; margin: 11px 0; color: #d0d9e5; font-size: .88rem; }
+    .package li::before { color: var(--green); font-weight: 900; content: "✓"; }
+    .package .button { width: 100%; }
+    .areas { padding: 70px 0; border-block: 1px solid var(--line); background: #0a1625; }
+    .area-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+    .area-chip { padding: 9px 15px; border: 1px solid var(--line); border-radius: 99px; color: #d1dce9; background: var(--panel); font-size: .86rem; }
+
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 46px; }
+    .why-copy h2 { margin: 12px 0; font-size: clamp(2rem, 4vw, 3.1rem); line-height: 1.1; letter-spacing: -.04em; }
+    .why-copy > p { color: var(--muted); }
+    .feature-list { display: grid; gap: 19px; margin-top: 28px; }
+    .feature { display: flex; gap: 14px; align-items: flex-start; }
+    .feature-icon { display: grid; flex: 0 0 42px; width: 42px; height: 42px; place-items: center; border: 1px solid rgba(69,214,232,.28); border-radius: 13px; color: var(--cyan); background: rgba(69,214,232,.08); font-weight: 900; }
+    .feature h3 { margin: 0 0 4px; font-size: 1rem; }
+    .feature p { margin: 0; color: var(--muted); font-size: .88rem; }
+    .feature-panel { padding: 30px; background: linear-gradient(145deg, #12253a, #0d1928); }
+    .feature-panel h3 { margin: 0 0 12px; font-size: 1.4rem; }
+    .feature-panel p { color: var(--muted); }
+    .feature-panel .mini-tag { display: inline-block; margin: 7px 6px 0 0; padding: 7px 10px; border-radius: 8px; color: #dce8f4; background: rgba(255,255,255,.06); font-size: .78rem; }
+
+    .faq { background: #0a1625; }
+    .faq-list { display: grid; gap: 11px; max-width: 850px; margin: auto; }
+    .faq-item { padding: 19px 21px; }
+    .faq-item h3 { margin: 0 0 6px; font-size: 1rem; }
+    .faq-item p { margin: 0; color: var(--muted); font-size: .9rem; }
+
+    .contact-section { padding: 88px 0; }
+    .contact-card { display: grid; grid-template-columns: .85fr 1.15fr; overflow: hidden; }
+    .contact-intro { padding: 36px; background: linear-gradient(155deg, #122b42, #0c1928); }
+    .contact-intro h2 { margin: 10px 0; font-size: 2rem; line-height: 1.1; }
+    .contact-intro p { color: var(--muted); }
+    .contact-detail { display: flex; gap: 11px; margin-top: 20px; color: #dce8f4; font-size: .9rem; }
+    .contact-detail b { color: var(--cyan); }
+    .contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 34px; }
+    .field { display: grid; gap: 7px; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { color: #dbe5ef; font-size: .83rem; font-weight: 700; }
+    .field input, .field select, .field textarea { width: 100%; padding: 12px 13px; border: 1px solid var(--line); border-radius: 10px; outline: none; color: var(--ink); background: #091523; }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--cyan); }
+    .field textarea { min-height: 100px; resize: vertical; }
+    .contact-form .button { grid-column: 1 / -1; width: 100%; }
+    .form-note { grid-column: 1 / -1; margin: -4px 0 0; color: var(--muted); font-size: .76rem; }
+    .footer { padding: 28px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: .84rem; }
+    .footer-row { display: flex; justify-content: space-between; gap: 15px; }
+
+    @media (max-width: 860px) {
+      .nav-links { display: none; position: absolute; top: 74px; inset-inline: 0; flex-direction: column; align-items: stretch; gap: 0; padding: 10px 20px 20px; border-bottom: 1px solid var(--line); background: #091523; }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 12px 0; }
+      .menu-button { display: block; }
+      .nav-cta { display: none; }
+      .hero-grid, .why-grid { grid-template-columns: 1fr; }
+      .hero-grid { gap: 38px; }
+      .hero-card { max-width: 550px; }
+      .card-grid, .package-grid { grid-template-columns: repeat(2, 1fr); }
+      .package:last-child { grid-column: 1 / -1; }
+      .contact-card { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 580px) {
+      .wrap { width: min(var(--content), calc(100% - 30px)); }
+      .section { padding: 70px 0; }
+      .hero { padding: 70px 0 50px; }
+      .hero h1 { font-size: clamp(2.65rem, 13vw, 4rem); }
+      .hero-actions { flex-direction: column; }
+      .service-strip { grid-template-columns: repeat(2, 1fr); margin-top: 42px; }
+      .card-grid, .package-grid { grid-template-columns: 1fr; }
+      .customer-logo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .package:last-child { grid-column: auto; }
+      .service-card img { height: 205px; }
+      .contact-intro, .contact-form { padding: 25px; }
+      .contact-form { grid-template-columns: 1fr; }
+      .field.full, .contact-form .button, .form-note { grid-column: auto; }
+      .footer-row { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+
+    :root {
+      color-scheme: light;
+      --ink: #151a22;
+      --muted: #667085;
+      --navy: #0c1118;
+      --panel: #fff;
+      --line: rgba(16, 24, 40, .1);
+      --cyan: #f36b32;
+      --blue: #ff9a57;
+      --green: #20a879;
+      --orange: #f36b32;
+      --content: 1180px;
+    }
+
+    body { color: var(--ink); background: #fff; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .section { padding: 96px 0; }
+    .section-heading h2, .why-copy h2 { font-family: inherit; font-weight: 780; text-transform: none; letter-spacing: -.045em; }
+    .section-heading p { color: var(--muted); }
+    .eyebrow { color: var(--orange); letter-spacing: .12em; }
+    .header { background: rgba(10, 14, 20, .92); border-bottom-color: rgba(255,255,255,.09); }
+    .nav { min-height: 80px; }
+    .brand-mark { width: 46px; border: 0; border-radius: 13px; color: #fff; background: linear-gradient(145deg, var(--orange), var(--blue)); font-size: .7rem; letter-spacing: -.08em; }
+    .brand-name { color: #fff; font-size: 1.2rem; }
+    .brand-sub { color: #b7b7b7; }
+    .nav-links { color: #fff; font-weight: 700; }
+    .nav-links a:hover, .footer a:hover { color: var(--orange); }
+    .nav-cta, .button { border-radius: 999px; color: #fff; background: linear-gradient(115deg, var(--orange), #ff874b); box-shadow: 0 8px 22px rgba(243,107,50,.22); }
+    .nav-cta:hover, .button:hover { filter: brightness(1.06); }
+    .menu-button { border-color: rgba(255,255,255,.2); border-radius: 11px; color: #fff; }
+    .hero {
+      overflow: visible;
+      padding: 64px 0 54px;
+      color: #fff;
+      background:
+        radial-gradient(ellipse at 85% 16%, rgba(243,107,50,.18), transparent 31%),
+        radial-gradient(ellipse at 13% 100%, rgba(75,107,145,.2), transparent 34%),
+        linear-gradient(135deg, #0b1119 0%, #111a26 56%, #0b1017 100%);
+    }
+    .hero-grid { grid-template-columns: .92fr 1.08fr; align-items: center; gap: clamp(35px, 6vw, 82px); }
+    .hero-quote { position: relative; overflow: hidden; padding: 29px; border: 1px solid rgba(255,255,255,.6); border-radius: 20px; color: #151a22; background: #fff; box-shadow: 0 28px 75px rgba(0,0,0,.3); }
+    .hero-quote::before { position: absolute; inset: 0 0 auto; height: 5px; background: linear-gradient(90deg, var(--orange), var(--blue)); content: ""; }
+    .quote-heading h2 { margin: 5px 0 18px; font-size: 1.7rem; line-height: 1.1; letter-spacing: -.035em; }
+    .quote-form { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+    .field { gap: 5px; }
+    .field label { color: #303846; font-size: .78rem; }
+    .field input, .field select, .field textarea { padding: 11px 12px; border-color: #d9dee6; border-radius: 9px; color: #202733; background: #fbfcfe; font-size: .9rem; }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(243,107,50,.12); }
+    .field textarea { min-height: 78px; }
+    .field.full, .quote-form .button, .quote-form .form-note { grid-column: 1 / -1; }
+    .quote-form .button { width: 100%; min-height: 48px; margin-top: 1px; }
+    .form-note { margin: -3px 0 0; color: #7a8492; font-size: .72rem; text-align: center; }
+    .hero-copy-block { color: #fff; }
+    .hero-copy-block .eyebrow { color: var(--orange); }
+    .hero h1 { margin: 14px 0 18px; font-family: inherit; font-size: clamp(3.25rem, 5.6vw, 5.6rem); font-weight: 850; line-height: .99; letter-spacing: -.065em; text-transform: none; }
+    .gradient-text { color: var(--orange); }
+    .hero-subtitle { max-width: 650px; margin: 0 0 17px; color: #f7f8fa; font-family: inherit; font-size: clamp(1.1rem, 2vw, 1.45rem); font-weight: 700; line-height: 1.35; text-transform: none; }
+    .hero-copy { max-width: 650px; margin: 0; color: #bdc5d0; font-size: 1rem; line-height: 1.75; }
+    .hero-service-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 23px; }
+    .hero-service-tags span { padding: 8px 12px; border: 1px solid rgba(255,255,255,.18); border-radius: 999px; color: #e8ebf0; background: rgba(255,255,255,.04); font-size: .76rem; font-weight: 650; }
+    .trust-strip { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 65px; margin-bottom: -112px; }
+    .trust-card { display: grid; min-height: 116px; align-content: center; justify-items: center; padding: 15px 12px; border: 1px solid #e8ebef; border-radius: 16px; color: #171d26; background: #fff; box-shadow: 0 15px 34px rgba(16,24,40,.1); text-align: center; }
+    .trust-icon { color: var(--orange); font-size: 1.35rem; font-weight: 900; line-height: 1.1; }
+    .trust-card strong { margin-top: 8px; font-size: .9rem; }
+    .trust-card > span:last-child { margin-top: 3px; color: #77808c; font-size: .72rem; }
+
+    .services { padding-top: 166px; background: #f6f7f9; }
+    .card-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .service-card, .package, .feature-panel, .faq-item, .contact-card { border: 1px solid #e8ebef; border-radius: 18px; background: #fff; box-shadow: 0 12px 32px rgba(16,24,40,.055); }
+    .service-card { border-top: 1px solid #e8ebef; }
+    .service-card:hover { border-color: rgba(243,107,50,.45); box-shadow: 0 18px 38px rgba(16,24,40,.1); }
+    .service-card img { height: 190px; border-radius: 17px 17px 0 0; }
+    .service-content h3 { color: #171d26; letter-spacing: -.02em; }
+    .service-content p { color: #697382; }
+    .service-icon, .text-link { color: var(--orange); }
+    .packages { background: #fff; }
+    .package { border-top: 1px solid #e8ebef; }
+    .package.featured { border: 1px solid rgba(243,107,50,.65); background: linear-gradient(155deg, #fff, #fff8f4); box-shadow: 0 17px 40px rgba(243,107,50,.12); }
+    .package-label { color: #697382; }
+    .package h3 { color: #171d26; }
+    .price { color: var(--orange); }
+    .price small { color: #77808c; }
+    .package li { color: #4c5664; }
+    .package li::before { color: var(--green); }
+    .button.secondary { border: 1px solid #d5dbe4; color: #202733; background: #fff; box-shadow: none; }
+    .button.secondary:hover { border-color: var(--orange); color: var(--orange); }
+    .areas { padding-top: 76px; padding-bottom: 76px; border-color: #e9edf2; background: #f6f7f9; }
+    .area-chip { border-color: #e1e6ed; border-radius: 999px; color: #3c4653; background: #fff; }
+    .area-chip:hover { border-color: var(--orange); }
+    .trusted-businesses { padding: 82px 0; border-block: 1px solid #e9edf2; background: #f6f7f9; }
+    .customer-logo-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+    .customer-logo-card { display: grid; min-height: 130px; place-items: center; margin: 0; padding: 16px; border: 1px solid #e8ebef; border-radius: 16px; background: #fff; }
+    .customer-logo-card img { width: 100%; max-width: 180px; height: 88px; object-fit: contain; }
+    #about { color: #fff; background: radial-gradient(ellipse at 90% 15%, rgba(243,107,50,.12), transparent 30%), linear-gradient(140deg, #121b28, #0c1118); }
+    #about .why-copy h2 { color: #fff; }
+    #about .why-copy > p, #about .feature p { color: #b8c2ce; }
+    #about .feature h3 { color: #fff; }
+    .feature-icon { border-color: rgba(243,107,50,.28); border-radius: 13px; color: var(--orange); background: rgba(243,107,50,.1); }
+    .feature-panel { border-color: rgba(255,255,255,.12); border-radius: 20px; background: rgba(255,255,255,.055); box-shadow: none; backdrop-filter: blur(12px); }
+    .feature-panel h3 { color: #fff; }
+    .feature-panel p { color: #b8c2ce; }
+    .feature-panel .mini-tag { color: #e7ebf1; background: rgba(255,255,255,.08); }
+    .faq { background: #f6f7f9; }
+    .faq-item { border-color: #e8ebef; }
+    .faq-item h3 { color: #171d26; }
+    .faq-item p { color: #697382; }
+    .contact-section { padding: 55px 0; color: #fff; background: #f6f7f9; }
+    .contact-banner { display: flex; align-items: center; justify-content: space-between; gap: 25px; padding: 34px 40px; border: 1px solid rgba(255,255,255,.1); border-radius: 22px; background: linear-gradient(125deg, #111a26, #1d2b3c); box-shadow: 0 18px 40px rgba(16,24,40,.14); }
+    .contact-banner h2 { margin: 6px 0; font-family: inherit; font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -.05em; text-transform: none; }
+    .contact-banner p { margin: 0; color: #b8c2ce; }
+    .footer { border-top-color: #222b38; color: #aab4c1; background: #0b1017; }
+    @media (max-width: 1020px) {
+      .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .customer-logo-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    .whatsapp-widget { position: fixed; z-index: 30; right: 24px; bottom: 24px; }
+    .whatsapp-launcher { display: inline-flex; min-height: 54px; align-items: center; gap: 10px; padding: 0 18px; border: 0; border-radius: 999px; color: #fff; background: #20b968; box-shadow: 0 10px 28px rgba(0,0,0,.24); font-size: .9rem; font-weight: 750; cursor: pointer; transition: transform .2s ease, box-shadow .2s ease; }
+    .whatsapp-launcher:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(0,0,0,.28); }
+    .whatsapp-icon { display: block; width: 23px; height: 23px; flex: 0 0 auto; }
+    .whatsapp-panel { position: absolute; right: 0; bottom: calc(100% + 14px); width: min(340px, calc(100vw - 30px)); overflow: hidden; border: 1px solid #e3e8ee; border-radius: 18px; color: #202733; background: #fff; box-shadow: 0 20px 60px rgba(10,20,30,.25); }
+    .whatsapp-panel[hidden] { display: none; }
+    .whatsapp-panel-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 17px 18px; color: #fff; background: #137b50; }
+    .whatsapp-panel-header strong { display: block; font-size: .96rem; }
+    .whatsapp-panel-header span { display: block; margin-top: 2px; color: rgba(255,255,255,.82); font-size: .75rem; }
+    .whatsapp-close { width: 32px; height: 32px; border: 0; border-radius: 50%; color: #fff; background: rgba(255,255,255,.14); font-size: 1.15rem; cursor: pointer; }
+    .whatsapp-panel-body { padding: 18px; }
+    .whatsapp-message { margin: 0 0 16px; padding: 13px 14px; border: 1px solid #e8edf1; border-radius: 14px 14px 14px 4px; color: #596372; background: #f5f7f8; font-size: .88rem; line-height: 1.55; }
+    .whatsapp-start { display: flex; min-height: 46px; align-items: center; justify-content: center; gap: 9px; border-radius: 999px; color: #fff; background: #20b968; font-size: .88rem; font-weight: 750; }
+    .whatsapp-start:hover { background: #179b56; }
+    .whatsapp-disclaimer { margin: 10px 0 0; color: #828b97; font-size: .7rem; text-align: center; }
+
+    @media (max-width: 860px) {
+      .nav-links { top: 80px; background: #0b1017; }
+      .hero-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+      .trust-strip { grid-template-columns: repeat(2, 1fr); }
+      .services { padding-top: 166px; }
+    }
+    @media (max-width: 580px) {
+      .section { padding: 68px 0; }
+      .hero { padding: 42px 0 34px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 30px; }
+      .hero-copy-block { grid-row: 1; }
+      .hero h1 { font-size: clamp(2.8rem, 13vw, 4rem); line-height: 1.02; }
+      .hero-quote { padding: 25px 19px; border-radius: 17px; }
+      .quote-form { grid-template-columns: 1fr 1fr; }
+      .trust-strip { gap: 9px; margin-top: 40px; margin-bottom: -95px; }
+      .trust-card { min-height: 104px; padding: 11px 7px; border-radius: 14px; }
+      .trust-card strong { font-size: .79rem; }
+      .trust-card > span:last-child { font-size: .66rem; }
+      .services { padding-top: 142px; }
+      .card-grid { grid-template-columns: 1fr; }
+      .contact-banner { align-items: flex-start; flex-direction: column; padding: 27px 23px; border-radius: 17px; }
+      .whatsapp-widget { right: 15px; bottom: 15px; }
+      .whatsapp-launcher { width: 52px; min-height: 52px; justify-content: center; padding: 0; }
+      .whatsapp-launcher > span { display: none; }
+      .whatsapp-panel { right: -3px; }
+      .menu-button { display: grid; width: 44px; height: 44px; place-items: center; padding: 0; }
+      .quote-form { grid-template-columns: 1fr; }
+      .field input, .field select, .field textarea { min-height: 48px; font-size: 16px; }
+      .field textarea { min-height: 96px; }
+      .quote-form .button { min-height: 50px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="wrap nav">
+      <a class="brand" href="#home" aria-label="JNR Technologies home">
+        <span class="brand-mark" aria-hidden="true">JNR</span>
+        <span><span class="brand-name">JNR TECHNOLOGIES</span><span class="brand-sub">CCTV · ELECTRICAL · NETWORKING</span></span>
+      </a>
+      <nav class="nav-links" id="nav-links" aria-label="Main navigation">
+        <a href="#services">Services</a>
+        <a href="#packages">CCTV packages</a>
+        <a href="#trusted-businesses">Trusted by</a>
+        <a href="#about">Why JNR</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <a class="nav-cta" href="contact.html">Request a quote <span aria-hidden="true">↗</span></a>
+      <button class="menu-button" id="menu-button" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open navigation">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div class="hero-quote" id="contact">
+            <div class="quote-heading">
+              <span class="eyebrow">Talk to JNR Technologies</span>
+              <h2>Get a project quote</h2>
+            </div>
+            <form class="quote-form" id="quote-form">
+              <div class="field"><label for="name">Your name *</label><input id="name" name="name" autocomplete="name" required placeholder="Name"></div>
+              <div class="field"><label for="phone">Your phone *</label><input id="phone" name="phone" type="tel" autocomplete="tel" required placeholder="Phone number"></div>
+              <div class="field"><label for="service">Service required</label>
+                <select id="service" name="service">
+                  <option>CCTV installation</option><option>Electrical wiring or upgrade</option>
+                  <option>Networking setup</option>
+                  <option>Fault finding or repair</option><option>General consultation</option>
+                </select>
+              </div>
+              <div class="field"><label for="area">Your area in Hyderabad *</label><input id="area" name="area" required placeholder="e.g. Madhapur"></div>
+              <div class="field full"><label for="message">How can we help?</label><textarea id="message" name="message" placeholder="Tell us a little about your project"></textarea></div>
+              <button class="button quote-submit" type="submit">Request a quote <span aria-hidden="true">→</span></button>
+              <p class="form-note">Your enquiry opens in WhatsApp for you to review before sending.</p>
+            </form>
+          </div>
+          <div class="hero-copy-block">
+            <span class="eyebrow">CCTV · Electrical · Networking</span>
+            <h1>Technology for <span class="gradient-text">safer spaces</span></h1>
+            <h2 class="hero-subtitle">CCTV, electrical and networking services for homes and businesses in Hyderabad</h2>
+            <p class="hero-copy">From camera installations and network cabling to networking setup, wiring upgrades and repairs, JNR Technologies helps you plan the right setup for your property.</p>
+            <div class="hero-service-tags">
+              <span>CCTV installation</span><span>Electrical wiring</span><span>Networking</span>
+            </div>
+          </div>
+        </div>
+        <div class="trust-strip" aria-label="JNR service highlights">
+          <div class="trust-card"><span class="trust-icon" aria-hidden="true">⌂</span><strong>Homes & businesses</strong><span>Residential and commercial projects</span></div>
+          <div class="trust-card"><span class="trust-icon" aria-hidden="true">◉</span><strong>Security systems</strong><span>Camera, recorder and mobile setup</span></div>
+          <div class="trust-card"><span class="trust-icon" aria-hidden="true">ϟ</span><strong>Electrical services</strong><span>Wiring, upgrades and repairs</span></div>
+          <div class="trust-card"><span class="trust-icon" aria-hidden="true">⌘</span><strong>Networking</strong><span>Connected homes and workplaces</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section services" id="services">
+      <div class="wrap">
+        <div class="section-heading">
+          <span class="eyebrow">What we do</span>
+          <h2>Practical solutions, professionally installed</h2>
+          <p>From a new CCTV system to a wiring upgrade, get help with the equipment and installation your property needs.</p>
+        </div>
+        <div class="card-grid">
+          <article class="service-card">
+            <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=800&q=80" alt="CCTV cameras monitoring a property" loading="lazy">
+            <div class="service-content">
+              <span class="service-icon" aria-hidden="true">◉</span>
+              <h3>CCTV camera installation</h3>
+              <p>HD and IP camera options, night vision, recording systems, and mobile viewing configuration for home or business.</p>
+              <a class="text-link" href="#contact">Discuss your setup →</a>
+            </div>
+          </article>
+          <article class="service-card">
+            <img src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=800&q=80" alt="Electrician working on a safe wiring installation" loading="lazy">
+            <div class="service-content">
+              <span class="service-icon" aria-hidden="true">ϟ</span>
+              <h3>Electrical wiring & upgrades</h3>
+              <p>Residential and commercial wiring, distribution board upgrades, MCB installation, and power cabling.</p>
+              <a class="text-link" href="#contact">Plan an electrical project →</a>
+            </div>
+          </article>
+          <article class="service-card">
+            <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80" alt="Technician inspecting electrical equipment" loading="lazy">
+            <div class="service-content">
+              <span class="service-icon" aria-hidden="true">⌁</span>
+              <h3>Fault finding & repairs</h3>
+              <p>Help diagnosing electrical faults, power trips, socket problems, and CCTV system issues.</p>
+              <a class="text-link" href="#contact">Request repair support →</a>
+            </div>
+          </article>
+          <article class="service-card">
+            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80" alt="Network server equipment in a data center" loading="lazy">
+            <div class="service-content">
+              <span class="service-icon" aria-hidden="true">⌘</span>
+              <h3>Networking</h3>
+              <p>Structured network cabling, router and switch setup for homes and offices.</p>
+              <a class="text-link" href="#contact" data-service="Networking setup">Plan your network →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section packages" id="packages">
+      <div class="wrap">
+        <div class="section-heading">
+          <span class="eyebrow">CCTV packages</span>
+          <h2>Choose a starting point</h2>
+          <p>Reference package options for common property sizes. Final equipment and installation pricing can be confirmed after a site assessment.</p>
+        </div>
+        <div class="package-grid">
+          <article class="package">
+            <span class="package-label">Home security</span>
+            <h3>4-channel kit</h3>
+            <div class="price" data-price-id="home-4">₹11,999 <small>/ starting price</small></div>
+            <ul>
+              <li>4 HD 1080p cameras</li>
+              <li>4-channel DVR/NVR system</li>
+              <li>1 TB surveillance storage</li>
+              <li>Mobile app viewing setup</li>
+              <li>Installation and warranty options</li>
+            </ul>
+            <a class="button secondary" href="#contact" data-package="4-channel home CCTV kit">Ask about this package</a>
+          </article>
+          <article class="package featured">
+            <span class="package-label">Business solution · popular</span>
+            <h3>8-channel kit</h3>
+            <div class="price" data-price-id="office-8">₹22,999 <small>/ starting price</small></div>
+            <ul>
+              <li>8 high-resolution cameras</li>
+              <li>8-channel NVR system</li>
+              <li>2 TB surveillance storage</li>
+              <li>Concealed cabling options</li>
+              <li>Mobile and PC viewing setup</li>
+              <li>Warranty options</li>
+            </ul>
+            <a class="button" href="#contact" data-package="8-channel office CCTV kit">Ask about this package</a>
+          </article>
+          <article class="package">
+            <span class="package-label">Enterprise & warehouse</span>
+            <h3>16-channel setup</h3>
+            <div class="price" data-price-id="enterprise-16">₹44,999 <small>/ starting price</small></div>
+            <ul>
+              <li>16 4K camera options</li>
+              <li>16-channel enterprise NVR</li>
+              <li>4 TB surveillance storage</li>
+              <li>Heavy-duty wiring options</li>
+              <li>Maintenance support options</li>
+            </ul>
+            <a class="button secondary" href="#contact" data-package="16-channel CCTV setup">Ask about this package</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="trusted-businesses" id="trusted-businesses">
+      <div class="wrap">
+        <div class="section-heading">
+          <span class="eyebrow">Customer network</span>
+          <h2>Trusted by businesses</h2>
+          <p>Here are some of the businesses JNR Technologies works with.</p>
+        </div>
+        <div class="customer-logo-grid" id="customer-logo-grid" role="list">
+          <figure class="customer-logo-card" role="listitem"><img src="CUSTOMERS/BAJAJ%20ELECTRANICS.webp" alt="Bajaj Electronics" loading="lazy" decoding="async"></figure>
+          <figure class="customer-logo-card" role="listitem"><img src="CUSTOMERS/CIVIC%20CENTER.webp" alt="Civic Centre" loading="lazy" decoding="async"></figure>
+          <figure class="customer-logo-card" role="listitem"><img src="CUSTOMERS/FED%20BANK.webp" alt="Federal Bank" loading="lazy" decoding="async"></figure>
+          <figure class="customer-logo-card" role="listitem"><img src="CUSTOMERS/FLY%20JACK.webp" alt="Flyjac and Logisteed" loading="lazy" decoding="async"></figure>
+          <figure class="customer-logo-card" role="listitem"><img src="CUSTOMERS/PRAGNYA%20IAS%20ACADEMY.webp" alt="Pragnya IAS Academy" loading="lazy" decoding="async"></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="wrap why-grid">
+        <div class="why-copy">
+          <span class="eyebrow">Why JNR Technologies</span>
+          <h2>Good work starts with understanding your needs</h2>
+          <p>We bring security, electrical and networking services together to help you plan, install and maintain the systems your home or business relies on.</p>
+          <div class="feature-list">
+            <div class="feature"><span class="feature-icon" aria-hidden="true">✓</span><div><h3>Solutions for your property</h3><p>Recommendations based on your space, requirements, and budget.</p></div></div>
+            <div class="feature"><span class="feature-icon" aria-hidden="true">⌂</span><div><h3>Residential & commercial</h3><p>Support for houses, offices, shops, and larger installations.</p></div></div>
+            <div class="feature"><span class="feature-icon" aria-hidden="true">↻</span><div><h3>Installation and aftercare</h3><p>Get help with setup, configuration, maintenance, and repairs.</p></div></div>
+          </div>
+        </div>
+        <aside class="feature-panel">
+          <span class="eyebrow">Complete service</span>
+          <h3>Security and electrical, coordinated</h3>
+          <p>From camera placement and network cabling to power upgrades, talk to one team about the whole project.</p>
+          <span class="mini-tag">CCTV & NVR</span><span class="mini-tag">Wiring & MCB</span><span class="mini-tag">Networking</span><span class="mini-tag">Repairs</span>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section faq">
+      <div class="wrap">
+        <div class="section-heading">
+          <span class="eyebrow">Common questions</span>
+          <h2>Before you get started</h2>
+        </div>
+        <div class="faq-list">
+          <article class="faq-item"><h3>Can you help me choose CCTV cameras for my property?</h3><p>Yes. Share the property type, areas to monitor, and your requirements so the right camera and recording options can be discussed.</p></article>
+          <article class="faq-item"><h3>Can I view my CCTV cameras on my phone?</h3><p>Mobile viewing can be configured for compatible camera and recorder systems, subject to your internet connection and device setup.</p></article>
+          <article class="faq-item"><h3>Are the package prices final?</h3><p>Prices are starting estimates and may vary depending on equipment, installation, and site requirements. Please confirm the final quote before booking.</p></article>
+          <article class="faq-item"><h3>Can you help set up business or home networking?</h3><p>JNR Technologies can discuss network cabling, router and switch setup for your property.</p></article>
+          <article class="faq-item"><h3>Do you provide electrical repair services?</h3><p>Electrical fault-finding and repair support is available. Contact us with your location and a description of the issue.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contact-cta">
+      <div class="wrap">
+        <div class="contact-banner">
+          <div>
+            <span class="eyebrow">Ready to get started?</span>
+            <h2>Let's plan your next project.</h2>
+            <p>Tell us what you need and request a quote from JNR Technologies.</p>
+            <p>Call <a href="tel:+918247007111">+91 82470 07111</a> · Gandhi Nagar, Hyderabad 500080</p>
+          </div>
+          <a class="button" href="contact.html">Contact Us <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="whatsapp-widget">
+    <section class="whatsapp-panel" id="whatsapp-panel" aria-label="WhatsApp chat panel" hidden>
+      <div class="whatsapp-panel-header">
+        <div><strong>Chat with JNR Technologies</strong><span>CCTV, electrical, networking and repair enquiries</span></div>
+        <button class="whatsapp-close" id="whatsapp-close" type="button" aria-label="Close WhatsApp chat">×</button>
+      </div>
+      <div class="whatsapp-panel-body">
+        <p class="whatsapp-message">Hi! Tell us what you need help with and we’ll continue the conversation on WhatsApp.</p>
+        <a class="whatsapp-start" id="whatsapp-start" href="#" target="_blank" rel="noopener noreferrer">
+          <svg class="whatsapp-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M12 2a9.8 9.8 0 0 0-8.42 14.82L2.3 21.7l5.02-1.25A9.8 9.8 0 1 0 12 2Zm0 17.8a7.9 7.9 0 0 1-4.03-1.1l-.29-.17-2.98.74.77-2.9-.19-.3A7.9 7.9 0 1 1 12 19.8Zm4.34-5.92c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.34-1.67-.14-.24-.02-.37.1-.49.1-.1.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.1.15 1.51.09.46-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28Z"/>
+          </svg>
+          Start WhatsApp chat
+        </a>
+        <p class="whatsapp-disclaimer">Your message opens in WhatsApp for you to review before sending.</p>
+      </div>
+    </section>
+    <button class="whatsapp-launcher" id="whatsapp-toggle" type="button" aria-label="Open WhatsApp chat" aria-expanded="false" aria-controls="whatsapp-panel">
+      <svg class="whatsapp-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="currentColor" d="M12 2a9.8 9.8 0 0 0-8.42 14.82L2.3 21.7l5.02-1.25A9.8 9.8 0 1 0 12 2Zm0 17.8a7.9 7.9 0 0 1-4.03-1.1l-.29-.17-2.98.74.77-2.9-.19-.3A7.9 7.9 0 1 1 12 19.8Zm4.34-5.92c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.34-1.67-.14-.24-.02-.37.1-.49.1-.1.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.1.15 1.51.09.46-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28Z"/>
+      </svg>
+      <span>Chat on WhatsApp</span>
+    </button>
+  </div>
+
+  <footer class="footer">
+    <div class="wrap footer-row">
+      <span>© <span id="year"></span> JNR Technologies. All rights reserved.</span>
+      <span>CCTV · Electrical · Networking | Hyderabad · <a href="contact.html">Contact Us</a></span>
+      <span><a href="tel:+918247007111">+91 82470 07111</a> · Gandhi Nagar, Hyderabad 500080</span>
+    </div>
+  </footer>
+
+  <script>
+    const whatsappNumber = "918247007111";
+    const whatsappPanel = document.getElementById("whatsapp-panel");
+    const whatsappToggle = document.getElementById("whatsapp-toggle");
+    const whatsappStart = document.getElementById("whatsapp-start");
+
+    function whatsappUrl(message) {
+      return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    }
+
+    whatsappStart.href = whatsappUrl("Hello JNR Technologies, I have a question about your services.");
+
+    function setWhatsAppPanelOpen(isOpen) {
+      whatsappPanel.hidden = !isOpen;
+      whatsappToggle.setAttribute("aria-expanded", String(isOpen));
+    }
+
+    whatsappToggle.addEventListener("click", () => {
+      setWhatsAppPanelOpen(whatsappPanel.hidden);
+    });
+
+    document.getElementById("whatsapp-close").addEventListener("click", () => {
+      setWhatsAppPanelOpen(false);
+      whatsappToggle.focus();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !whatsappPanel.hidden) {
+        setWhatsAppPanelOpen(false);
+        whatsappToggle.focus();
+      }
+    });
+
+    const menuButton = document.getElementById("menu-button");
+    const navLinks = document.getElementById("nav-links");
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+      menuButton.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
+    });
+
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.setAttribute("aria-label", "Open navigation");
+      });
+    });
+
+    document.querySelectorAll("[data-package]").forEach((link) => {
+      link.addEventListener("click", () => {
+        document.getElementById("service").value = "CCTV installation";
+        document.getElementById("message").value = `I'm interested in the ${link.dataset.package}.`;
+      });
+    });
+
+    document.querySelectorAll("[data-service]").forEach((link) => {
+      link.addEventListener("click", () => {
+        document.getElementById("service").value = link.dataset.service;
+      });
+    });
+
+    document.getElementById("quote-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      if (!form.reportValidity()) return;
+
+      const values = new FormData(form);
+      const message = [
+        "Hello JNR Technologies, I would like to enquire about your services.",
+        `Name: ${values.get("name")}`,
+        `Phone: ${values.get("phone")}`,
+        `Area: ${values.get("area")}`,
+        `Service: ${values.get("service")}`,
+        `Details: ${values.get("message") || "N/A"}`
+      ].join("\n");
+      window.open(whatsappUrl(message), "_blank", "noopener,noreferrer");
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
